@@ -1,0 +1,5 @@
+mongoDB-Passsword.txt
+node_modules
+.env
+.env.e2e
+dist
