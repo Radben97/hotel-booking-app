@@ -1,3 +1,4 @@
+
 import {RegisterFormData} from "./pages/Register"
 import { SignInFormData } from "./pages/SignIn"
 
@@ -53,4 +54,15 @@ export const validateToken = async () => {
     }
     return response.json()
 
+}
+
+export const addHotel = async (hotelFormData: FormData) => {
+    const response = await fetch(`${API_BASE_URL}/api/my-hotels`, {
+        method: "POST",
+        credentials: "include",
+        body: hotelFormData
+    })
+
+    if (!response.ok) throw new Error("Something went wrong")
+    return response.json()
 }
