@@ -1,6 +1,6 @@
 import { useFormContext, useFormState } from "react-hook-form";
 import { hotelFormData } from "./ManageHotelForm";
-import { hotelTypes } from "../config/hotel-options-config";
+import { hotelTypes } from "../../config/hotel-options-config";
 import { useWatch } from "react-hook-form";
 
 

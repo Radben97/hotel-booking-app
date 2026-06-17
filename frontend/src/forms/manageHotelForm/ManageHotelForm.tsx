@@ -19,6 +19,8 @@ export type hotelFormData = {
     childcount: number
 }
 
+export const buttonStyle = "bg-blue-600 text-white p-2 font-bold hover:bg-blue-500 text-xl rounded disabled: bg-gray-500"
+
 type hotelprops = {
     onSave: (hotelFormData: FormData) => void
     isLoading: boolean
@@ -55,7 +57,7 @@ const ManageHotelForm = ({onSave,isLoading}: hotelprops) => {
               <GuestSection />
               <ImagesSection />
               <span className="flex justify-end">
-                  <button type="submit" className="bg-blue-600 text-white p-2 font-bold hover:bg-blue-500 text-xl rounded disabled: bg-gray-500" disabled={isLoading}>
+                  <button type="submit" className={buttonStyle} disabled={isLoading}>
                       {isLoading ? "Saving" : "Add"}
                       </button>
               </span>
