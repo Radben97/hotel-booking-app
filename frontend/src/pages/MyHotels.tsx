@@ -51,9 +51,8 @@ const MyHotels = () => {
                 </div>
                   </div>
                   <span className="flex justify-end">
-                      <Link to={`/my-hotel/${hotel._id}`} className={buttonStyle}>View More</Link>
+                      <Link to={`/edit-hotel/${hotel._id}`} className={buttonStyle}>View More</Link>
                   </span>
-                  
             </div>
           );
         })}

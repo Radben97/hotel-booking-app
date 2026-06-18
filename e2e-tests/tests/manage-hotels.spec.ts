@@ -21,3 +21,21 @@ test("Added hotel, page header and add hotel button should be visible", async ({
   await expect(page.getByRole("link", { name: "View More" })).toBeVisible();
   await expect(page.locator("svg")).toHaveCount(5);
 });
+
+test("able to edit hotel", async ({ page }) => {
+  await page.goto(`${UI_URL}`)
+  await page.getByRole("link", { name: "Sign In" }).click();
+  await page.locator("[name=email]").fill("e2etest1@gmail.com");
+  await page.locator("[name=password]").fill("12345678");
+  await page.getByRole("button", { name: "Log In" }).click();
+  await page.getByRole("link", { name: "My hotels" }).click();
+  await page.getByRole("link", { name: "View More" }).first().click()
+  await page.waitForSelector("[name='name']", { state: "attached" })
+  await page.locator("[name='name']").fill("ITC Grand Chola UPDATED")
+  await page.getByRole("button", { name: "Add" }).click()
+  await page.reload()
+  await expect(page.locator("[name='name']")).toHaveValue("ITC Grand Chola UPDATED")
+  await page.locator("[name='name']").fill("ITC Grand Chola")
+  await page.getByRole("button", { name: "Add" }).click()
+
+})
