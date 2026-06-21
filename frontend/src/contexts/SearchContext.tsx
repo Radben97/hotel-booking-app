@@ -1,0 +1,52 @@
+import React from "react"
+import { createContext, ReactNode, useContext, useState } from "react"
+
+type searchContext = {
+    destination: string,
+    checkIn: Date,
+    checkOut: Date,
+    adultCount: number,
+    childCount: number,
+    hotelId: string | undefined,
+    setSearchValues: (destination: string, checkIn: Date, checkOut: Date, adultCount: number,childCount: number, hotelId?: string) => void
+}
+
+const searchContext = React.createContext<searchContext | undefined>(undefined)
+export const SearchContextProvider = ({ children }: { children: ReactNode }) => {
+    const [destination, setDestination] = useState<string>("")
+    const [checkIn, setCheckIn] = useState<Date>(new Date())
+    const [checkOut, setCheckOut] = useState<Date>(new Date())
+    const [adultCount, setAdultCount] = useState<number>(1)
+    const [childCount, setChildCount] = useState<number>(1)
+    const [hotelId, setHotelId] = useState<string>("")
+    const setSearchValues = (destination: string, checkIn: Date, checkOut: Date, adultCount: number, childCount: number, hotelId: string | undefined) => {
+        setDestination(destination)
+        setCheckIn(checkIn)
+        setCheckOut(checkOut)
+        setAdultCount(adultCount)
+        setChildCount(childCount)
+        if (hotelId) {
+            setHotelId(hotelId)
+        }
+    }
+
+    return (
+        <searchContext.Provider value={{
+            destination,
+            checkIn,
+            checkOut,
+            adultCount,
+            childCount,
+            hotelId,
+            setSearchValues,
+        }}>
+            {children}
+        </searchContext.Provider>
+    )
+}
+
+export const useSearchContext = () => {
+    const context = React.useContext(searchContext)
+    console.log("inside context",context)
+    return context as searchContext
+}

@@ -4,7 +4,8 @@ import "dotenv/config";
 import mongoose from 'mongoose';
 import userRoutes from './routes/users.js';
 import authRoutes from './routes/auth.js'
-import hotelRoutes from './routes/my-hotels.js'
+import myHotelRoutes from './routes/my-hotels.js'
+import hotelRoutes from './routes/hotels.js'
 import cookieParser from "cookie-parser"
 import path from 'path';
 import {v2 as cloudinary} from "cloudinary"
@@ -32,7 +33,8 @@ app.use(express.static(path.join(import.meta.dirname, "../../frontend/dist")))
 
 app.use("/api/auth",authRoutes)
 app.use("/api/users", userRoutes)
-app.use("/api/my-hotels",hotelRoutes)
+app.use("/api/my-hotels", myHotelRoutes)
+app.use("/api/hotels",hotelRoutes)
 
 app.all("/*splat",(req: Request, res: Response) => {
     res.sendFile(path.join(import.meta.dirname, "../../frontend/dist/index.html"))
