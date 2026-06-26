@@ -4,7 +4,7 @@ A hotel booking application built using TypeScript, React, Node.js (Express), Mo
 
 ## 🌐 Live Website
 The preview version is hosted on Render. You can access it here:
-👉 **[Click here to open Holidays](YOUR_RENDER_DEPLOYMENT_LINK_HERE)**
+👉 **[Click here to open Holidays](https://hotel-booking-app-267e.onrender.com)**
 
 *Note: As this is hosted on a free tier, the website may take 30–60 seconds to load initially if the server has been idle.*
 
