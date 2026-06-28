@@ -19,3 +19,12 @@ test("Filters should filter out hotels properly", async ({ page }) => {
   await page.getByRole("checkbox", { name: "4" }).click();
   await expect(page.getByText("0 Hotelsin India")).toBeVisible();
 });
+
+test("should show hotel details", async ({ page }) => {
+  await page.getByPlaceholder("Where are you going?").fill("India");
+  await page.getByRole("button", { name: "Search" }).click();
+  await page.waitForTimeout(1000);
+  await page.getByText("Pride Plaza Hotel").click()
+  await expect(page.getByRole("button", { name: "Book Now" })).toBeVisible()
+  await expect(page).toHaveURL(/detail/)
+})

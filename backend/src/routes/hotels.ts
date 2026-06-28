@@ -1,6 +1,7 @@
 import express, { Request, Response } from "express"
 import Hotel from "../models/hotel.js"
-import { HotelResponse } from "../shared/types.js"
+import { HotelResponse, HotelType } from "../shared/types.js"
+import { param, validationResult } from "express-validator"
 const router = express.Router()
 
 router.get("/search", async (req: Request, res: Response) => {
@@ -91,5 +92,23 @@ const constructQuery = (queryParams: any) => {
 
     return queryObj
 }
+
+router.get("/:id", [
+    param("id","id is required").notEmpty()
+], async (req: Request, res: Response) => {
+    const errors = validationResult(req)
+    if(!errors.isEmpty()) res.status(400).json({message: errors.array()})
+    const id = req.params.id?.toString()
+    console.log(req.params)
+    if (!id) throw new Error("Id doesnt exist")
+    try {
+        const hotel: HotelType | null = await Hotel.findOne({_id: id})
+        res.json(hotel)
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({message: `error in fetching hotel, ${error}`})
+    }
+
+})
 
 export default router
