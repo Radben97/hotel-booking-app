@@ -13,4 +13,4 @@ The preview version is hosted on Render. You can access it here:
 ## 🛠️ Tech Stack
 * **Frontend:** React, TypeScript, Tailwind CSS
 * **Backend:** Node.js, Express.js
-* **Database:** MongoDB
+* **Database:** MongoDB, Cloudinary
