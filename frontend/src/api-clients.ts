@@ -2,6 +2,7 @@
 import {RegisterFormData} from "./pages/Register"
 import { SignInFormData } from "./pages/SignIn"
 import { HotelResponse, HotelType } from "../../backend/src/shared/types"
+import { BookingFormData } from "./forms/BookingForm/BookingForm"
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || ""
 export type searchParamType = {
@@ -142,5 +143,62 @@ export const searchHotels = async (searchParams: searchParamType): Promise<Hotel
 export const getHotelById = async (hotelId: string) => {
     const response = await fetch(`${API_BASE_URL}/api/hotels/${hotelId}`)
     if (!response.ok) throw new Error("Could not fetch hotel")
+    return response.json()
+}
+
+export const getMe = async () => {
+    const response = await fetch(`${API_BASE_URL}/api/users/me`, {
+        credentials: "include"
+    })
+
+    if (!response.ok) throw new Error("Could not fetch user")
+    return response.json()
+}
+
+export const createPaymentOrder = async ({ hotelId, numberOfNights }: { hotelId: string, numberOfNights: number }) => {
+    const response = await fetch(`${API_BASE_URL}/api/hotels/${hotelId}/booking/create-payment-order`, {
+        method: "POST",
+        credentials: "include",
+        body: JSON.stringify({ numberOfNights: numberOfNights }),
+        headers: {
+            "Content-Type":"application/json"
+        }
+    })
+
+    if (!response.ok) throw new Error("Payment order could not be created")
+    return response.json()
+
+}
+
+export const verifyPayment = async ({
+    razorpay_order_id,
+    razorpay_payment_id,
+    razorpay_signature
+}:any) => {
+    const response = await fetch(`${API_BASE_URL}/api/hotels/verify-payment`, {
+        method: "POST",
+        credentials: "include",
+        headers: {
+            "Content-Type":"application/json"
+        },
+        body: JSON.stringify({razorpay_order_id,
+    razorpay_payment_id,
+    razorpay_signature})
+    })
+    if (!response.ok) throw new Error("Payment failed")
+    return response.json()
+}
+  
+export const createBooking = async (formData: BookingFormData) => {
+    const response = await fetch(`${API_BASE_URL}/api/hotels/${formData.hotelId}/bookings`, {
+        method: "POST",
+        credentials: "include",
+        body: JSON.stringify(formData),
+        headers: {
+            "Content-Type":"application/json"
+        }
+    })
+
+    if (!response.ok) throw new Error("Booking failed")
     return response.json()
 }

@@ -1,3 +1,11 @@
+export type UserType = {
+    _id: string;
+    email: string;
+    password: string;
+    firstname: string;
+    lastname: string;
+}
+
 export type HotelType = {
     _id: string,
     userId: string
@@ -12,7 +20,8 @@ export type HotelType = {
     amenities: string[],
     starrating: number,
     imageURLs: string[],
-    lastupdated: Date
+    lastupdated: Date,
+    bookings: bookingType[]
 }
 
 export type HotelResponse = {
@@ -22,4 +31,23 @@ export type HotelResponse = {
         pageNumber: number,
         pages: number
     }
+}
+
+export type paymentOrderResponse = {
+    paymentOrderId: string,
+    key_id: string,
+    totalCost: string
+}
+
+export type bookingType = {
+    _id: string,
+    userId: string,
+    email:string,
+    firstName: string,
+    lastName: string,
+    adultcount: number,
+    childcount: number,
+    checkIn: Date,
+    checkOut: Date,
+    totalCost: number
 }
