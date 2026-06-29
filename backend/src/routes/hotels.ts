@@ -16,6 +16,16 @@ const razorpayInstance = new Razorpay({
   key_secret: process.env.RAZORPAY_API_SECRET as string,
 });
 
+router.get("/all", async (req:Request,res:Response) => {
+  try {
+    const hotels = await Hotel.find()
+    res.status(200).json(hotels)
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({message: "Could not fetch all hotels"})
+    }
+})
+
 router.get("/search", async (req: Request, res: Response) => {
   console.log("--------------------");
   console.log("query", req.query);

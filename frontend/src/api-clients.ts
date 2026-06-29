@@ -202,3 +202,17 @@ export const createBooking = async (formData: BookingFormData) => {
     if (!response.ok) throw new Error("Booking failed")
     return response.json()
 }
+
+export const getBookings = async () => {
+    const response = await fetch(`${API_BASE_URL}/api/my-bookings`, {
+        credentials: "include"
+    })
+    if (!response.ok) throw new Error("Error fetching bookings")
+    return response.json()
+}
+
+export const getAllHotels = async () => {
+    const response = await fetch(`${API_BASE_URL}/api/hotels/all`)
+    if (!response.ok) throw new Error("Could not fetch all hotels")
+    return response.json()
+}
