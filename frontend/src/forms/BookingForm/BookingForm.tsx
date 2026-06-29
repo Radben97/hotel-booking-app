@@ -37,7 +37,7 @@ const BookingForm = ({ currentUser, paymentData }: BookingFormProps) => {
           navigate("/")
     },
         onError: () => {
-        showToast({message: "Hotel booking failed",type:"ERROR"})
+        showToast({message: "Hotel booking failed, Your money will be refunded in 2-3 business days",type:"ERROR"})
     },
   });
     const { mutate } = useMutation({
